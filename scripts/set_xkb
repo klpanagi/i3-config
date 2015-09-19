@@ -1,0 +1,4 @@
+#!/bin/bash
+
+LG=$(setxkbmap -rules evdev  -layout "us,gr" -option "grp:alt_shift_toggle")
+export LG

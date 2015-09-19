@@ -1,0 +1,4 @@
+#!/bin/bash
+
+i3status --config ~/.config/i3/status_bars/system_info.conf
+
