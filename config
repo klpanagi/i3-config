@@ -1,19 +1,25 @@
-# Should you change your keyboard layout somewhen, delete
-# this file and re-run i3-config-wizard(1).
-#
+###########
+# Colors 
+###########
+set $black #000000
+set $white #FFFFFF
+set $green #33FF33
+set $lightblue #6666FF
+set $blue #3333FF
+set $red #FF0000
+set $pink #FF99CC 
+set $grey #A0A0A0
+set $yellow #FFFF33
 
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
+# Set mod key (Mod4 -> window-key)
 set $mod Mod4
 
-# fix graphics glitch
+########################
+# Fix graphics glitch
+########################
 new_window none
 new_window pixel 2
 new_float pixel 2
-
-font pango:Droid Sans 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -23,30 +29,49 @@ focus_follows_mouse  no
 
 # The middle button and a modifer over any part of the window kills the window
 bindsym --whole-window $mod+button3 kill
-#
 
 workspace_auto_back_and_forth yes
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec terminator
+##########
+# Font
+# ########
+font pango:Droid Sans 8
 
+#########################
+# Application bindings
+#########################
 # start web browser
 bindsym $mod+b exec "google-chrome"
+
+# File manager
+bindsym $mod+n exec "pcmanfm"
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
 
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-#bindsym $mod+d exec --no-startup-id "j4-dmenu-desktop --dmenu='dmenu -i -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*''"
+
+# System mode: Lock, Logout, Suspend, Hibernate, Reboot, Shutdown
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (x) shutdown
+mode "$mode_system" {
+  bindsym l exec --no-startup-id ~/.i3/i3exit lock, mode "default"
+  bindsym e exec --no-startup-id ~/.i3/i3exit logout, mode "default"
+  bindsym s exec --no-startup-id ~/.i3/i3exit suspend, mode "default"
+  bindsym h exec --no-startup-id ~/.i3/i3exit hibernate, mode "default"
+  bindsym r exec --no-startup-id ~/.i3/i3exit reboot, mode "default"
+  bindsym x exec --no-startup-id ~/.i3/i3exit shutdown, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+
+}
+bindsym $mod+x mode "$mode_system"
 
 # change focus
-#bindsym $mod+h focus left
-#bindsym $mod+k focus down
-#bindsym $mod+j focus up
-#bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -54,11 +79,9 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move down
 bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -94,33 +117,37 @@ bindsym $mod+a focus parent
 workspace_auto_back_and_forth yes
 bindsym $od+z workspace back_and_forth
 
-
 ## Delaying urgency hint reset on workspace change
 force_display_urgency_hint 500 ms
 
-
 # ASSIGN WORKSPACE VARIABLES
-set $WS1 "1 >_ term"
-set $WS2 "2 browser"
-set $WS3 mail
-set $WS4 system
-set $WS5 misc
-set $WS6 media
+set $WS1 ">_ term"
+set $WS2 "web"
+set $WS3 "mail"
+set $WS4 "system"
+set $WS5 "misc"
+set $WS6 "media"
 
 # switch to workspace. Here the name for each workspace is assigned
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
 
 # move focused container to workspace
-#bindsym $mod+Shift+1 move container to workspace 1: Main
-#bindsym $mod+Shift+2 move container to workspace 2: Mail
-#bindsym $mod+Shift+3 move container to workspace 3: Term
-#bindsym $mod+Shift+4 move container to workspace 4: Web
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS3
 
 ## Assign workspaces to specific monitor output ##
-workspace $WS1 output DVI-0
-workspace $WS2 output DVI-1
-workspace $WS3 output DVI-0
-workspace $WS4 output DVI-1
-workspace $WS5 output DVI-0
+#workspace $WS1 output DVI-0
+#workspace $WS2 output DVI-1
+#workspace $WS3 output DVI-0
+#workspace $WS4 output DVI-1
+#workspace $WS5 output DVI-0
 
 ## Auto assign certain programms to workspaces ##
 assign [class="Thunderbird"] $WS3
@@ -130,8 +157,6 @@ assign [instance="terminator|Xfce4-terminal|URxvt"] $WS1
 assign [class="Google-chrome"] $WS2
 
 
-##################################################
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -139,7 +164,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+# resize window
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
         bindsym j resize shrink height 10 px or 10 ppt
@@ -157,13 +182,12 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 # Lock screen
-bindsym Mod1+Control+l exec i3-msg workspace 1 && i3lock -t -d
+bindsym Mod1+Control+l exec i3-msg workspace $WS1 && i3lock -t -d
 
-################### Audio volume control keybindings #######################
+# Volume control #
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-  # Decrease
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+  # Increase
 
@@ -174,40 +198,21 @@ client.unfocused #333333 #333333 #dedede
 client.focused_inactive #333333 #333333 #dedede
 client.urgent #383a3b #383a3b #ee0000
 
-
-## PRIMARY Monitor status bar ##
 bar {
-        id primary
-        status_command  ~/.config/i3/i3scripts/i3primary
-        colors {
-          background #232323
-          statusline #33aaff
-          focused_workspace #11aaff #005500
-          active_workspace #11aaff #005500
-          urgent_workspace #ffffff #990000
-        }
-        font pango:Droid Sans, Ionicons, FontAwesome 10
-        output DVI-0
-        position bottom
-        tray_output DVI-0
-        workspace_buttons yes
-}
-
-
-## SECONDARY Monitor status bar ##
-bar {
-  id secondary
-  status_command ~/.config/i3/i3scripts/i3secondary
+  id primary
+  #mode dock
+  status_command  ~/.i3/i3scripts/i3primary
   colors {
-    background #232323
-    statusline #33aaff
+    background #111111
+    statusline #e65c00
     focused_workspace #11aaff #005500
     active_workspace #11aaff #005500
-    urgent_workspace #ffffff #990000
+    urgent_workspace #ff0000 #990000
   }
-  font pango:Droid Sans, Ionicons, FontAwesome 9
-  output DVI-1
+  font pango:Droid Sans, Ionicons, FontAwesome 8
+  #output DVI-0
   position bottom
+  #tray_output DVI-0
   workspace_buttons yes
 }
 
@@ -217,7 +222,7 @@ exec --no-startup-id thunderbird
 exec --no-startup-id dropbox start
 exec --no-startup-id VirtualBox
 exec google-chrome
-exec terminator
-exec bash /home/klpanagi/.config/i3/scripts/set_wallpaper
-exec bash /home/klpanagi/.config/i3/scripts/set_xkb
-exec bash /home/klpanagi/.config/i3/scripts/skype
+exec urxvt
+exec bash scripts/set_wallpaper
+exec bash scripts/set_xkb
+exec bash scripts/skype
