@@ -209,6 +209,10 @@ client.unfocused #333333 #333333 #dedede
 client.focused_inactive #333333 #333333 #dedede
 client.urgent #383a3b #383a3b #ee0000
 
+# Monitor
+
+exec --no-startup-id xrandr --output DP1 --auto --left-of eDP1
+
 bar {
   id primary
   #mode dock
@@ -220,7 +224,7 @@ bar {
     active_workspace #11aaff #005500
     urgent_workspace #ff0000 #990000
   }
-  font pango:Droid Sans, Ionicons, FontAwesome 10
+  font pango:pango:DejaVu Sans Mono, Awesome 8
   #output DVI-0
   position bottom
   #tray_output DVI-0
