@@ -7,12 +7,12 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 1
-        output_format = "i3bar"
+  colors = true
+  interval = 1
+  output_format = "i3bar"
 }
 
-#order += "ipv6"
+order += "ipv6"
 order += "cpu_usage"
 order += "load"
 order += "cpu_temperature 0"
@@ -60,7 +60,7 @@ cpu_usage {
 }
 
 tztime local {
-        format = " %A %e.%B  %H:%M:%S "
+  format = " %A %e.%B  %H:%M:%S "
 }
 
 volume master {

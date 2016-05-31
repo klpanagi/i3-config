@@ -1,0 +1,53 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+update_interval 1.0
+total_run_times 0
+override_utf8_locale yes
+use_xft yes
+xftfont Droid Sans:size=8
+
+# bright green 2fdc57
+# bright purple F70FF0
+# bright cyan 00C758
+# bright cyan 00fff2
+# bright red ff0000
+# cyan 5DBC9C 66B298
+# dark cyan 00A9B5
+# dark  purple 6f3bff
+# light blue 5C83DE
+# light blue 7996a9
+# light pink F26C91
+# light purple C89BDC
+# light gold C8C039
+# light yellow AFB500
+# light yellow C1B63E
+# light green 33CC99
+# light green 6DBE67
+# light red dc322f
+# light red B94653
+# mustard A0881E
+# orange D2820B FD9D0D
+# purple 8F5CAB
+# sky blue A4DDED
+# white FFFFFF
+# arch blue 1793D1
+
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+
+
+TEXT
+[
+  { "full_text" : "Root", "color" : "\#888888" } ,
+  { "full_text" : "${fs_free /}" , "color" : "\#1793D1" } ,
+  { "full_text" : "Home", "color" : "\#888888" } ,
+  { "full_text" : "${fs_free /home}" , "color" : "\#1793D1" } , 
+  { "full_text" : "Mem", "color" : "\#888888" } , 
+  { "full_text" : "${mem}", "color" : "\#1793D1" } ,
+  { "full_text" : "Wifi", "color" : "\#888888" } ,
+  { "full_text" : "Vol", "color" : "\#888888" } , 
+  { "full_text" : "${time %a %b %_e, %_I:%M %p}", "color" : "\#1793D1" }
+]

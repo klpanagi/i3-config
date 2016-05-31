@@ -1,0 +1,53 @@
+background no
+out_to_console yes
+out_to_x no
+
+## Create own window to draw <yes/no>
+own_window yes
+
+update_interval 2.0
+total_run_times 0
+use_spacer none
+
+#override_utf8_locale yes
+
+TEXT
+
+# JSON for i3bar
+#
+[
+  { "full_text" : "Home:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text" : "${fs_free /home} Free" , "color" : "\#ffffff", "separator": true},
+  { "full_text" : "Wifi:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text" : "${wireless_essid wlan0}", "color" : "\#83b3a3", "separator": false, "separator_block_width": 10},
+  { "full_text" : "${addrs wlan0}", "color" : "\#388e8e", "separator": false, "separator_block_width":6},
+  { "full_text" : "${downspeed wlan0}", "separator": false, "separator_block_width":6, "color": "\#436EEE"},
+  { "full_text" : "${upspeed wlan0}", "separator": true, "color": "\#43CD80"},
+  { "full_text" : "Eth:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text" : "${addrs eth0}", "separator": false, "separator_block_width":6, "color": "\#388e8e"},
+  { "full_text" : "${downspeed eth0}", "separator": false, "separator_block_width":6, "color": "\#436EEE"},
+  { "full_text" : "${upspeed eth0}", "separator": true, "color": "\#43CD80"},
+  { "full_text" : "Net:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text" : "${upspeed wlan0}", "separator": true, "separator_block_width":6, "color": "\#43CD80"},
+  { "full_text" : "Mem:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text" : "${memperc}%", "min_width":"000%", "separator": false, "separator_block_width":3, "color":"${if_match ${memperc} < 33}\#7f9f7f${else}${if_match ${memperc} > 66}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+  { "full_text" : "${membar}", "color":"\#83b3a3", "separator": false},
+  { "full_text" : "${mem}/${memmax}", "color":"\#83b3a3", "separator": true},
+  { "full_text" : "Cpu:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text" : "${cpu}%", "min_width":"000%", "separator": false, "separator_block_width":3, "color":"${if_match ${cpu} < 33}\#7f9f7f${else}${if_match ${cpu} > 66}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+  { "full_text" : "${exec awk '{print $1}' /proc/loadavg}", "separator": false, "separator_block_width":6, "color":"${if_match ${exec awk '{print $1}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $1}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+  { "full_text" : "${exec awk '{print $2}' /proc/loadavg}", "separator": false, "separator_block_width":6, "color":"${if_match ${exec awk '{print $2}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $2}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+  { "full_text" : "${exec awk '{print $3}' /proc/loadavg}", "color":"${if_match ${exec awk '{print $3}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $3}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}", "separator" : false},
+  { "full_text": "Bat:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text": "${battery_percent BAT1}%", "min_width":"000%", "color":"${if_match ${battery_percent BAT1} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT1} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+
+  { "full_text": "${time %m.%d.%Y}", "separator": false, "separator_block_width":6, "color":"\#ffcfaf"},
+  { "full_text": "${time %I:%M %P}", "color": "\#ffff00"}
+  #{  "full_text" : "\
+  #${if_updatenr 1}host: ${exec hostname}${endif}\
+    #${if_updatenr 2}kernel: ${exec uname -r}${endif}\
+    #${if_updatenr 3}distro: ${exec lsb_release -d -s | sed 's/"//g'} (${exec lsb_release -r -s})${endif}\
+    #${if_updatenr 4}up: ${uptime}${endif}\
+      #", "color":"\#DCDCCC"}
+
+],
