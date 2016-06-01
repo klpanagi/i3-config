@@ -208,11 +208,10 @@ bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+  # Increase
 
 
 # class                 border  backgr. text    indicator child_border
-client.focused          $col2 $col2 $col2
-client.focused          $col2 $col2 $col2
-client.unfocused        $col6 $col6 $col6
-client.focused_inactive $col1 $col1 $col1
-client.urgent           $col1 $col1 $col1
+client.focused          $col2 $col2 $white
+client.unfocused        $col6 $col6 $white
+client.focused_inactive $col1 $col1 $white
+client.urgent           $col1 $col1 $white
 
 # Set wallpaper
 exec --no-startup-id feh --bg-fill ~/.i3/wallpapers/AirLock-Logonscreen-BLUE-BY-Designfjotten.jpg
