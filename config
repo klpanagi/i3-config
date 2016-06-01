@@ -223,13 +223,12 @@ exec --no-startup-id conky -c ~/.i3/appearance/panels/side_gray/side_gray
 exec --no-startup-id xrandr --output DP1 --auto --left-of eDP1
 
 bar {
+    output DVI-0
     position top
     mode dock
     workspace_buttons yes
     tray_output none
     status_command ~/.i3/appearance/status_bar/main-bar.sh
-    #status_command conky -c ~/.i3/appearance/status_bar/conky/info2
-    #status_command i3status --config ~/.i3/appearance/status_bar/i3status/bar2
     font pango:FontAwesome 10
     colors {
       background             $col1
