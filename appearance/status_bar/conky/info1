@@ -37,9 +37,11 @@ TEXT
   { "full_text" : "${cpu}%", "min_width":"000%", "separator": false, "separator_block_width":3, "color":"${if_match ${cpu} < 33}\#7f9f7f${else}${if_match ${cpu} > 66}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
   { "full_text" : "${exec awk '{print $1}' /proc/loadavg}", "separator": false, "separator_block_width":6, "color":"${if_match ${exec awk '{print $1}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $1}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
   { "full_text" : "${exec awk '{print $2}' /proc/loadavg}", "separator": false, "separator_block_width":6, "color":"${if_match ${exec awk '{print $2}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $2}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
-  { "full_text" : "${exec awk '{print $3}' /proc/loadavg}", "color":"${if_match ${exec awk '{print $3}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $3}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}", "separator" : false},
+  { "full_text" : "${exec awk '{print $3}' /proc/loadavg}", "color":"${if_match ${exec awk '{print $3}' /proc/loadavg} < 1.0}\#7f9f7f${else}${if_match ${exec awk '{print $3}' /proc/loadavg} > 3.0}\#dca3a3${else}\#c3bf9f${endif}${endif}", "separator" : true},
   { "full_text": "Bat:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
-  { "full_text": "${battery_percent BAT1}%", "min_width":"000%", "color":"${if_match ${battery_percent BAT1} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT1} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+  { "full_text": "${battery_percent BAT1}%", "min_width":"000%", "color":"${if_match ${battery_percent BAT1} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT1} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}", "separator": true},
+  { "full_text": "Vol:", "separator": false, "separator_block_width":6, "color": "\#ffa500"},
+  { "full_text": "${exec amixer get Master -M | grep -oE -m1 '[[:digit:]]*%'}", "min_width":"000%", "color":"\#ffffff", "separator": true},
 
   { "full_text": "${time %m.%d.%Y}", "separator": false, "separator_block_width":6, "color":"\#ffcfaf"},
   { "full_text": "${time %I:%M %P}", "color": "\#ffff00"}
