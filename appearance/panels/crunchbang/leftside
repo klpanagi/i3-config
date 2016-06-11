@@ -1,0 +1,91 @@
+alignment top_left
+double_buffer yes
+gap_x 5
+gap_y 20
+update_interval 2.0
+#background yes
+own_window yes
+#own_window_argb_visual yes
+own_window_type override
+own_window_transparent yes
+own_window_class conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+minimum_size 230 5
+maximum_width 230
+use_xft yes
+xftalpha 0.5
+xftfont caviar dreams:size=8
+
+TEXT
+
+${font size=7}${color blue}Cyber-Punkers $hr${color }${font }
+
+  Kernel: ${alignr}$kernel ($machine)
+    Uptime: ${alignr}$uptime
+    Time: ${alignr}${time %H:%M:%S}
+
+${font size=7}${color blue}CPU Usage $hr${color }${font }
+
+  CPU1 ${alignr}${cpu cpu1}%
+  ${cpugraph cpu1 12, 200}
+
+  CPU2 ${alignr}${cpu cpu2}%
+  ${cpugraph cpu2 12, 200}
+
+  CPU3 ${alignr}${cpu cpu3}%
+  ${cpugraph cpu3 12, 200}
+
+  CPU4 ${alignr}${cpu cpu4}%
+  ${cpugraph cpu4 12, 200}
+
+  ${font size=7}${color blue}Ram Usage $hr${color }${font }
+
+  RAM ${alignr}$mem/$memmax
+
+  ${membar 6, 200}
+
+  Swap ${alignr}$swap/$swapmax
+
+  ${swapbar 6, 200}
+
+${font size=7}${color blue}Filesystem $hr${color }${font }
+
+  / ${alignr}${fs_free /}
+  ${fs_bar 6, 200 /}
+
+  /home ${alignr}${fs_free /home}
+  ${fs_bar 6, 200 /home}
+
+${font size=7}${color blue}Top CPU Tasks $hr${color }${font }
+
+${color #ddaa00}${top name 1}${alignr}${top cpu 1}%${color }
+${top name 2}${alignr}${top cpu 2}%
+${top name 3}${alignr}${top cpu 3}%
+${top name 4}${alignr}${top cpu 4}%
+${top name 5}${alignr}${top cpu 5}%
+${top name 6}${alignr}${top cpu 6}%
+${top name 7}${alignr}${top cpu 7}%
+
+${font size=7}${color blue}Top RAM Tasks  $hr${color }${font }
+
+${color #ddaa00}${top_mem name 1}${alignr}${top_mem mem 1}%${color }
+${top_mem name 2}${alignr}${top_mem mem 2}%
+${top_mem name 3}${alignr}${top_mem mem 3}%
+${top_mem name 4}${alignr}${top_mem mem 4}%
+${top_mem name 5}${alignr}${top_mem mem 5}%
+${top_mem name 6}${alignr}${top_mem mem 6}%
+${top_mem name 7}${alignr}${top_mem mem 7}%
+
+${font size=7}${color blue}Network $hr${color }${font }
+
+IP (Wlan): $alignr${addr wlan0}
+IP (Eth): $alignr${addr eth0}
+IP (Public): $alignr${execi 600 wget http://checkip.dyndns.org/ -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>'}
+Total Down $alignr${totaldown wlan0}
+Total Up   $alignr${totalup wlan0}
+
+Download ${alignr}${downspeed wlan0}
+${downspeedgraph wlan0}
+
+Upload ${alignr}${upspeed wlan0}
+${upspeedgraph wlan0}

@@ -1,0 +1,8 @@
+Instructions for installation:
+
+
+1.  You need to have installed Conky 1.8 or later
+2. Install the fonts "neuropol" and "droid"
+3. Copy the .conky2 folder on your /home/user/
+4. Set the file start_tron.sh in the autostart of your system (this depends of the distro you use)
+5. Enjoy!

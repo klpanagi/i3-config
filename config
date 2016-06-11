@@ -216,13 +216,17 @@ client.urgent           $col1 $col1 $white
 # Set wallpaper
 exec --no-startup-id feh --bg-fill ~/.i3/wallpapers/AirLock-Logonscreen-BLUE-BY-Designfjotten.jpg
 
-exec --no-startup-id conky -c ~/.i3/appearance/panels/side_gray/side_gray
+
 
 # Monitor
 exec --no-startup-id xrandr --output DP1 --auto --left-of eDP1
 
+## Some panels
+exec --no-startup-id ~/.i3/appearance/panels/crunchbang/run.sh
+
+
 bar {
-    output DVI-0
+    #output DVI-0
     position top
     mode dock
     workspace_buttons yes
