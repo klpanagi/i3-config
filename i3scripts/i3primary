@@ -1,4 +1,0 @@
-#!/bin/bash
-
-i3status --config $(dirname ${BASH_SOURCE})/../i3status_bars/system_info.conf
-
