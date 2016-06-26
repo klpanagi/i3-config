@@ -27,10 +27,10 @@ font pango:Cantarell 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminal
+bindsym $mod+Return exec terminator
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+x kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_recency
@@ -39,7 +39,8 @@ bindsym $mod+d exec --no-startup-id dmenu_recency
 bindsym $mod+z exec --no-startup-id morc_menu
 
 ## Screen Resolution and Layout
-exec --no-startup-id ~/.i3/scripts/monitors.sh
+#exec --no-startup-id ~/.i3/scripts/monitors.sh
+exec --no-startup-id xrandr --output DVI-0 --mode 1920x1080 --output DVI-1 --right-of DVI-0
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -54,8 +55,8 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
@@ -73,7 +74,7 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# focus_follows_mouse no
+focus_follows_mouse no
 
 # change focus
 bindsym $mod+j focus left
@@ -138,15 +139,15 @@ bindsym $mod+minus scratchpad show
 
 # Workspace names
 set $ws1 1:>_
-set $ws2 2:web
+set $ws2 2:www
 set $ws3 3:system
-set $ws3 4:vm
+set $ws4 4:vm
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -157,20 +158,20 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # Move focused container to workspace
-bindsym $mod+Ctrl+1 move container to workspace number 1
-bindsym $mod+Ctrl+2 move container to workspace number 2
-bindsym $mod+Ctrl+3 move container to workspace number 3
-bindsym $mod+Ctrl+4 move container to workspace number 4
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
 bindsym $mod+Ctrl+5 move container to workspace number 5
 bindsym $mod+Ctrl+6 move container to workspace number 6
 bindsym $mod+Ctrl+7 move container to workspace number 7
 bindsym $mod+Ctrl+8 move container to workspace number 8
 
 # Move to workspace with focused container
-bindsym $mod+Shift+1 move container to workspace number 1; workspace 1
-bindsym $mod+Shift+2 move container to workspace number 2; workspace 2
-bindsym $mod+Shift+3 move container to workspace number 3; workspace 3
-bindsym $mod+Shift+4 move container to workspace number 4; workspace 4
+bindsym $mod+Shift+1 move container to workspace number 1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace $ws4
 bindsym $mod+Shift+5 move container to workspace number 5; workspace 5
 bindsym $mod+Shift+6 move container to workspace number 6; workspace 6
 bindsym $mod+Shift+7 move container to workspace number 7; workspace 7
@@ -180,7 +181,10 @@ bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
 # assign [class="Thunderbird"] 1
 # assign [class="Pale moon"] 2
 # assign [class="Pcmanfm"] 3
-# assign [class="Skype"] 5
+#assign [class="Skype"] 5
+#assign [class="(?i)virtualbox"] $ws4
+#assign [class="Terminator"] $ws1
+#assign [class="Chromium"] $ws2
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -223,7 +227,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system   (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
@@ -276,9 +280,16 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 # exec --no-startup-id blueman
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
+#exec --no-startup-id start_conky_maia
+exec --no-startup-id start_conky_green
+exec --no-startup-id xautolock -time 30 -locker blurlock
+exec --no-startup-id i3-msg 'workspace 2:www; exec /usr/bin/chromium'
+exec --no-startup-id i3-msg 'workspace 1:>_; exec /usr/bin/terminator'
+#exec --no-startup-id i3-msg 'workspace 4:vm; exec /usr/bin/virtualbox'
+#exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/skype'
+
+# Wallpaper
+exec_always --no-startup-id feh --bg-center $HOME/.i3/wallpapers/current
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
@@ -286,7 +297,7 @@ bar {
 	status_command i3status ~/.i3/appearance/status_bar/i3status/manjaro.conf
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-        tray_output primary
+        #tray_output primary
 #	tray_output eDP1
 
 	bindsym button4 nop
