@@ -172,7 +172,21 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 
-#navigate workspaces next / previous
+##
+# Switch to workspace with numpad
+##
+bindsym $mod+KP_1 workspace $ws1
+bindsym $mod+KP_2 workspace $ws2
+bindsym $mod+KP_3 workspace $ws3
+bindsym $mod+KP_4 workspace $ws4
+bindsym $mod+KP_5 workspace 5
+bindsym $mod+KP_6 workspace 6
+bindsym $mod+KP_7 workspace 7
+bindsym $mod+KP_8 workspace 8
+
+##
+# Navigate workspaces next / previous
+##
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
@@ -313,10 +327,10 @@ exec_always --no-startup-id feh --bg-center $HOME/.i3/wallpapers/current
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-  status_command i3status ~/.i3/appearance/status_bar/i3status/manjaro.conf
+    status_command i3status ~/.i3/appearance/status_bar/i3status/manjaro.conf
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-    tray_output primary
+    #tray_output primary
 #	tray_output eDP1dd
 
     bindsym button4 nop
