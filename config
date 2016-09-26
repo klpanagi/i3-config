@@ -1,3 +1,5 @@
+# vim:filetype=i3
+
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -157,20 +159,26 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Workspace names
-set $ws1 1:>_
-set $ws2 2:www
-set $ws3 3:system
-set $ws4 4:vm
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6: 6"
+set $ws7 "7: 7"
+set $ws8 "8: 8"
+set $ws9 "9:"
+set $ws10 "10:"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
 
 ##
 # Switch to workspace with numpad
@@ -179,10 +187,11 @@ bindsym $mod+KP_1 workspace $ws1
 bindsym $mod+KP_2 workspace $ws2
 bindsym $mod+KP_3 workspace $ws3
 bindsym $mod+KP_4 workspace $ws4
-bindsym $mod+KP_5 workspace 5
-bindsym $mod+KP_6 workspace 6
-bindsym $mod+KP_7 workspace 7
-bindsym $mod+KP_8 workspace 8
+bindsym $mod+KP_5 workspace $ws5
+bindsym $mod+KP_6 workspace $ws6
+bindsym $mod+KP_7 workspace $ws7
+bindsym $mod+KP_8 workspace $ws8
+bindsym $mod+KP_9 workspace $ws9
 
 ##
 # Navigate workspaces next / previous
@@ -195,26 +204,26 @@ bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
 bindsym $mod+Ctrl+3 move container to workspace $ws3
 bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace number 5
-bindsym $mod+Ctrl+6 move container to workspace number 6
-bindsym $mod+Ctrl+7 move container to workspace number 7
-bindsym $mod+Ctrl+8 move container to workspace number 8
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace number 1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace number 2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace number 3; workspace $ws3
 bindsym $mod+Shift+4 move container to workspace number 4; workspace $ws4
-bindsym $mod+Shift+5 move container to workspace number 5; workspace 5
-bindsym $mod+Shift+6 move container to workspace number 6; workspace 6
-bindsym $mod+Shift+7 move container to workspace number 7; workspace 7
-bindsym $mod+Shift+8 move container to workspace number 8; workspace 8
+bindsym $mod+Shift+5 move container to workspace number 5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace $ws8
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] 1
-# assign [class="Pale moon"] 2
+assign [class="Thunderbird"] $ws9
+assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] 3
-#assign [class="Skype"] 5
+assign [class="Skype"] $ws10
 #assign [class="(?i)virtualbox"] $ws4
 #assign [class="Terminator"] $ws1
 #assign [class="Chromium"] $ws2
@@ -243,7 +252,7 @@ for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Skype"] floating enable border normal
 for_window [class="Thus"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
+#for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # switch to workspace with urgent window automatically
@@ -315,9 +324,11 @@ exec --no-startup-id clipit
 #exec --no-startup-id start_conky_maia
 exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 30 -locker blurlock
-exec --no-startup-id i3-msg 'workspace 2:www; exec /usr/bin/chromium'
+exec --no-startup-id i3-msg 'workspace 2:www; exec /usr/bin/palemoon'
 exec --no-startup-id i3-msg 'workspace 1:>_; exec /usr/bin/terminator'
+exec --no-startup-id apulse32 skype
 #exec --no-startup-id i3-msg 'workspace 4:vm; exec /usr/bin/virtualbox'
+exec --no-startup-id thunderbird
 #exec --no-startup-id i3-msg 'workspace 5; exec /usr/bin/skype'
 exec --no-startup-id setxkbmap -layout "us, gr" -option "grp:alt_shift_toggle"
 
