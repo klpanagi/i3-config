@@ -60,8 +60,8 @@ bindsym $mod+d exec --no-startup-id dmenu_recency
 bindsym $mod+z exec --no-startup-id morc_menu
 
 ## Screen Resolution and Layout
-#exec --no-startup-id ~/.i3/scripts/monitors.sh
-exec --no-startup-id xrandr --output DVI-0 --mode 1920x1080 --output DVI-1 --right-of DVI-0
+exec --no-startup-id ~/.i3/scripts/monitors.sh
+#exec --no-startup-id xrandr --output DVI-0 --mode 1920x1080 --output DVI-1 --right-of DVI-0
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
