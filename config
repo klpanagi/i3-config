@@ -134,10 +134,11 @@ bindsym $mod+q split toggle
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# change container layout (stacked, tabbed, toggle split) ----{
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+# ----}
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -163,10 +164,9 @@ bindsym $mod+minus scratchpad show
   #Move current workspace to different output
     bindsym Left move workspace to output left
     bindsym Right move workspace to output right
-      ...
     bindsym Escape mode "default"
   }
-  bindsym $mod+m mode "Move workspace"
+  #bindsym $mod+ mode "Move workspace"
 # --}
 
 # Workspace names
@@ -266,7 +266,7 @@ for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Skype"] floating enable border normal
 for_window [class="Thus"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-#for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # switch to workspace with urgent window automatically
@@ -367,7 +367,7 @@ exec_always --no-startup-id feh --bg-center $HOME/.i3/wallpapers/current
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-    status_command i3status ~/.i3/appearance/status_bar/i3status/manjaro.conf
+    status_command i3status -c ~/.i3/appearance/status_bar/i3status/manjaro.conf
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
     #tray_output primary
@@ -375,7 +375,7 @@ bar {
 
     bindsym button4 nop
     bindsym button5 nop
-    font pango:Tewi, Icons 10
+    font pango:Tewi, Icons 12
 
     colors {
         background $transparent
