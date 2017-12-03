@@ -5,6 +5,7 @@
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
+set $alt Mod1
 
 # Color definitions
 set $black       #2c2836
@@ -24,6 +25,18 @@ set $darkcyan    #9ac1d9
 set $white       #f1edfb
 set $darkwhite   #f1edfb
 set $background  #133B47
+
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6: 6"
+set $ws7 "7: 7"
+set $ws8 "8: 8"
+set $ws9 "9:"
+set $ws10 "10:"
+
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -67,6 +80,17 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ## Screen Resolution and Layout
 exec --no-startup-id ~/.i3/scripts/monitors.sh
 #exec --no-startup-id xrandr --output DVI-0 --mode 1920x1080 --output DVI-1 --right-of DVI-0
+
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output primary
+workspace $ws7 output primary
+workspace $ws8 output primary
+workspace $ws9 output primary
+workspace $ws10 output primary
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -159,13 +183,14 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Multi Monitor --{
-  mode "Move workspace" {
+mode "Move workspace" {
   #Move current workspace to different output
-    bindsym Left move workspace to output left
-    bindsym Right move workspace to output right
-    bindsym Escape mode "default"
-  }
-  #bindsym $mod+ mode "Move workspace"
+  bindsym Left move workspace to output left
+  bindsym Right move workspace to output right
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+bindsym $mod+Shift+w mode "Move workspace"
 # --}
 
 # Workspace names
@@ -190,19 +215,6 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-
-##
-# Switch to workspace with numpad
-##
-bindsym $mod+KP_1 workspace $ws1
-bindsym $mod+KP_2 workspace $ws2
-bindsym $mod+KP_3 workspace $ws3
-bindsym $mod+KP_4 workspace $ws4
-bindsym $mod+KP_5 workspace $ws5
-bindsym $mod+KP_6 workspace $ws6
-bindsym $mod+KP_7 workspace $ws7
-bindsym $mod+KP_8 workspace $ws8
-bindsym $mod+KP_9 workspace $ws9
 
 ##
 # Navigate workspaces next / previous
@@ -235,11 +247,11 @@ bindsym $mod+Shift+9 move container to workspace number 8; workspace $ws9
 # Open applications on specific workspaces
 assign [class="Thunderbird"] $ws9
 assign [class="Pale moon"] $ws2
-# assign [class="Pcmanfm"] 3
+assign [class="Pcmanfm"] $ws3
 assign [class="Skype"] $ws10
 #assign [class="(?i)virtualbox"] $ws4
 #assign [class="Terminator"] $ws1
-#assign [class="Chromium"] $ws2
+assign [class="Chromium"] $ws2
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -338,7 +350,7 @@ exec --no-startup-id clipit
 #exec --no-startup-id start_conky_green
 exec --no-startup-id start_conky_live_green
 exec --no-startup-id xautolock -time 30 -locker blurlock
-exec --no-startup-id i3-msg 'workspace 2:;exec /usr/bin/firefox'
+# exec --no-startup-id i3-msg 'workspace 2:;exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 1:; exec /usr/bin/termite'
 exec --no-startup-id apulse32 skype
 #exec --no-startup-id i3-msg 'workspace 6: 6; exec /usr/bin/virtualbox'
@@ -347,18 +359,8 @@ exec --no-startup-id thunderbird
 exec --no-startup-id setxkbmap -layout "us, gr" -option "grp:alt_shift_toggle"
 exec --no-startup-id dunst
 exec --no-startup-id xedgewarp -b
-
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6: 6"
-set $ws7 "7: 7"
-set $ws8 "8: 8"
-set $ws9 "9:"
-set $ws10 "10:"
-
+exec --no-startup-id chromium
+exec --no-startup-id pcmanfm
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-center $HOME/.i3/wallpapers/current
