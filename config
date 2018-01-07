@@ -26,16 +26,27 @@ set $white       #f1edfb
 set $darkwhite   #f1edfb
 set $background  #133B47
 
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6: 6"
-set $ws7 "7: 7"
-set $ws8 "8: 8"
-set $ws9 "9:"
-set $ws10 "10:"
+# set $ws1 "1:"
+# set $ws2 "2:"
+# set $ws3 "3:"
+# set $ws4 "4:"
+# set $ws5 "5:"
+# set $ws6 "6: 6"
+# set $ws7 "7: 7"
+# set $ws8 "8: 8"
+# set $ws9 "9:"
+# set $ws10 "10:"
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 
 # set default desktop layout (default is tiling)
@@ -60,8 +71,23 @@ font pango:FontAwesome 10, Terminus 10
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output primary
+workspace $ws7 output primary
+workspace $ws8 output primary
+workspace $ws9 output primary
+
+## Screen Resolution and Layout
+#exec --no-startup-id ~/.i3/scripts/monitors.sh
+exec --no-startup-id autorandr --load default
+exec --no-startup-id xset b off
+
 # start a terminal
-bindsym $mod+Return exec termite
+ bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+x kill
@@ -77,19 +103,7 @@ bindsym $mod+i exec ~/.i3/scripts/i3_switch_workspace.sh
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 
-## Screen Resolution and Layout
-# exec --no-startup-id ~/.i3/scripts/monitors.sh
 #exec --no-startup-id xrandr --output DVI-0 --mode 1920x1080 --output DVI-1 --right-of DVI-0
-
-workspace $ws1 output primary
-workspace $ws2 output primary
-workspace $ws3 output primary
-workspace $ws4 output primary
-workspace $ws5 output primary
-workspace $ws6 output primary
-workspace $ws7 output primary
-workspace $ws8 output primary
-workspace $ws9 output primary
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -233,10 +247,10 @@ bindsym $mod+Ctrl+9 move container to workspace $ws9
 # bindsym $mod+Shift+9 move container to workspace number 8; workspace $ws9
 
 # Open applications on specific workspaces
-assign [class="Thunderbird"] $ws9
+assign [class="Thunderbird"] $ws4
 assign [class="Pale moon"] $ws2
 assign [class="Pcmanfm"] $ws3
-assign [class="Skype"] $ws10
+assign [class="Skype"] $ws5
 #assign [class="(?i)virtualbox"] $ws4
 #assign [class="Terminator"] $ws1
 assign [class="Chromium"] $ws2
@@ -324,6 +338,7 @@ mode "resize" {
 # Lock screen
 bindsym $mod+Control+l exec --no-startup-id blurlock
 
+
 # Autostart applications
 ## adjustment of i3bar battery reading (only run at the very first login):
 #exec --no-startup-id /usr/bin/adjust_i3statusconf
@@ -348,35 +363,38 @@ exec --no-startup-id chromium
 exec --no-startup-id pcmanfm
 exec --no-startup-id termite
 
-# Wallpaper
-exec_always --no-startup-id feh --bg-center $HOME/.i3/wallpapers/current
+# Wallpaper -- Set through Nitrogen!
+#exec_always --no-startup-id feh --bg-center $HOME/.i3/wallpapers/current
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-    status_command i3status -c ~/.i3/appearance/status_bar/i3status/manjaro.conf
+#bar # {
+#     status_command i3status -c ~/.i3/appearance/status_bar/i3status/manjaro.conf
+#
+# ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# #tray_output primary
+# #	tray_output eDP1dd
+#
+#     bindsym button4 nop
+#     bindsym button5 nop
+#     font pango:Tewi, Icons 12
+#
+#     colors {
+#         background $transparent
+#         background #2B2C2B
+#         statusline #F9FAF9
+#         separator  #454947
+#
+# #       border  backgr. text
+#         focused_workspace  #F9FAF9 #16A085 #2B2C2B
+#         active_workspace   #595B5B #353836 #FDF6E3
+#         inactive_workspace #595B5B #353836 #EEE8D5
+#         urgent_workspace   #16A085 #FDF6E3 #E5201D
+#     }
+# }
 
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-    #tray_output primary
-#	tray_output eDP1dd
-
-    bindsym button4 nop
-    bindsym button5 nop
-    font pango:Tewi, Icons 12
-
-    colors {
-        background $transparent
-        background #2B2C2B
-        statusline #F9FAF9
-        separator  #454947
-
-        #                  border  backgr. text
-        focused_workspace  #F9FAF9 #16A085 #2B2C2B
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #353836 #EEE8D5
-        urgent_workspace   #16A085 #FDF6E3 #E5201D
-    }
-}
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
